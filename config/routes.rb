@@ -1,4 +1,5 @@
 So5100999::Application.routes.draw do
+  mount Rack::Api::User, :at => "/api/user/1"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
