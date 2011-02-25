@@ -1,11 +1,15 @@
 module Rack
   module Api
     class User
-      def self.call(env)
-        if env["SCRIPT_NAME"] =~ /^\/api\/user\//i
+      def initialize(app)
+        @app = app
+      end
+
+      def call(env)
+        if env["PATH_INFO"] =~ /^\/api\/user\//i
           [200, {}, ["Here it is."]]
         else
-          [200, {}, ["Nope, missed it. Here's env:\n" + env.inspect]]
+          @app.call(env)
         end
       end
     end
